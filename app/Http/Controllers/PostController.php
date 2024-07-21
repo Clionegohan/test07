@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use宣言は外部にあるクラスをPostContoroller内にインポートきる
-//この場合、App\Model内のPostクラスをインポートしている
 use App\Models\Post;
+
 
 class PostController extends Controller
 {
-    public function index(Post $post)//インポートしたPostをインスタンス化して$postとして使用。
+    public function index(Post $post)
     {
-        return $post->get();//$postの中身を戻り値にする。
+        //'getPaginateByLimit'メソッドを使用して、投稿をページネーションして取得
+        return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
+        //brade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した&postを代入。
     }
 }
+?>
+
