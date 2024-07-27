@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('title', 50)->nullable(false)->after('id'); // タイトル
-            $table->text('body')->nullable(false)->after('title'); // 本文
-            $table->softDeletes(); // 論理削除日時
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -24,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn(['title', 'body', 'deleted_at']);
-            $table->softDeletes(); // 論理削除日時
+            //
         });
     }
 };

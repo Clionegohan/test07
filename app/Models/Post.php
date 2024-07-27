@@ -14,15 +14,20 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
+        'category_id'
         ];
         
     protected $dates = ['deleted_at'];
 
 
-    public function getPaginateByLimit(int $limit_count = 10)
+    public function getPaginateByLimit(int $limit_count = 5)
     {
         //update_atでこう順に並べた後、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return $this::with('category')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
-
+    //1postに対してカテゴリは1つしか定まらないので単数形
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

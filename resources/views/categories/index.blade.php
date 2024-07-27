@@ -15,8 +15,7 @@
                 <h2 class='title'>
                     <a href="/posts/{{ $post->id}}">{{ $post->title}}</a>
                 </h2>
-                <!-- category毎のページ遷移 -->
-                <a href="/categories/{{ $post->category->id}}">{{ $post->category->name }}</a>
+                <a href="">{{ $post->category->name }}</a>
                 <p class='body'>{{$post->body}}</p>
                 <!-- ブログ投稿の削除にて追記 -->
                 <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
